@@ -5,15 +5,16 @@ import androidx.room.PrimaryKey
 
 
 @Entity
-class Light (
+class Heater (
     @PrimaryKey
     val id: Int,
-    val intensity: Int,
+    val temperature: Int,
     val mode: Boolean,
     val deviceName: String,
-    val productType: String){
+    val productType: String) {
+
     fun toDevice():Device{
         val modeToString:String = if(mode) "ON" else "OFF"
-        return Device(deviceName,id,intensity,modeToString,0,productType,0)
+        return Device(deviceName,id,0,modeToString,0,productType,temperature)
     }
 }

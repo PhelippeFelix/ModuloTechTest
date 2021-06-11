@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ModuloTechTest</string>
+    <string name="Light">Light</string>
+    <string name="RollerShutter">Roller Shutter</string>
+    <string name="Heater">Heater</string>
+    <string name="Ok">Ok</string>
 </resources>
