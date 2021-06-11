@@ -10,13 +10,13 @@ import felix.phelippe.modulotechtest.models.classes.Device
 import kotlinx.android.synthetic.main.activity_main_list_item.view.*
 
 class MainViewHolder (itemView: View) : RecyclerView.ViewHolder(itemView) {
-    fun updateWithData(deviceType: Device, position:Int){
+    fun updateWithData(device: Device, position:Int){
         val glide: RequestManager = Glide.with(itemView)
 
-        itemView.productName.text = deviceType.deviceName
-        itemView.productType.text = deviceType.productType
+        itemView.productName.text = device.deviceName
+        itemView.productType.text = device.productType
 
-        when (deviceType.productType) {
+        when (device.productType) {
             "Light" -> {
                 glide.load(R.drawable.light)
                     .apply(RequestOptions()

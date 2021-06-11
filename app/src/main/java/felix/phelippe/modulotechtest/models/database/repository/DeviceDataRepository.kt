@@ -1,14 +1,10 @@
 package felix.phelippe.modulotechtest.models.database.repository
 
-import androidx.lifecycle.LiveData
-import androidx.sqlite.db.SimpleSQLiteQuery
 import felix.phelippe.modulotechtest.models.classes.Heater
 import felix.phelippe.modulotechtest.models.classes.Light
-import felix.phelippe.modulotechtest.models.classes.MainUser
 import felix.phelippe.modulotechtest.models.classes.RollerShutter
 import felix.phelippe.modulotechtest.models.database.TestDatabase
-import felix.phelippe.modulotechtest.models.database.dao.DeviceDao
-import io.reactivex.Observable
+
 
 class DeviceDataRepository(private val database:TestDatabase) {
     // --- GET ---
