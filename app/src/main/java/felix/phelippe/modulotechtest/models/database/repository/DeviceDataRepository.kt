@@ -21,6 +21,20 @@ class DeviceDataRepository(private val database:TestDatabase) {
         return database.deviceDao().getRollerShutters()
     }
 
+    // --- GET BY ID ---
+
+    suspend fun getLightById(index:Int) : Light {
+        return database.deviceDao().getLightById(index)
+    }
+
+    suspend fun getHeaterById(index:Int) : Heater {
+        return database.deviceDao().getHeaterById(index)
+    }
+
+    suspend fun getRollerShutterById(index:Int) : RollerShutter {
+        return database.deviceDao().getRollerShutterById(index)
+    }
+
     // --- CREATE ---
 
     suspend fun insertLight(light: Light): Long {
@@ -34,6 +48,21 @@ class DeviceDataRepository(private val database:TestDatabase) {
     suspend fun insertRollerShutter(rollerShutter: RollerShutter): Long {
         return database.deviceDao().insertRollerShutter(rollerShutter)
     }
+
+    // --- DELETE ---
+
+    suspend fun deleteLight(light: Light) {
+        return database.deviceDao().deleteLight(light)
+    }
+
+    suspend fun deleteHeater(heater: Heater) {
+        return database.deviceDao().deleteHeater(heater)
+    }
+
+    suspend fun deleteRollerShutter(rollerShutter: RollerShutter) {
+        return database.deviceDao().deleteRollerShutter(rollerShutter)
+    }
+
 
     // --- UPDATE ---
     suspend fun updateLight(light: Light) :Int {

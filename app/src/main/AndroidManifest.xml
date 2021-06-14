@@ -13,6 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ModuloTechTest">
+        <activity android:name=".view.activities.LightActivity"></activity>
+        <activity android:name=".view.activities.HeaterActivity" />
+        <activity android:name=".view.activities.RollerShutterActivity" />
+        <activity
+            android:name=".view.activities.SettingsActivity"
+            android:label="@string/title_activity_settings" />
         <activity android:name=".view.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

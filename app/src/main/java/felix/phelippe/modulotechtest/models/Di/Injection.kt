@@ -11,17 +11,17 @@ import felix.phelippe.modulotechtest.viewModel.ViewModelFactory
 
 
 object Injection {
-    fun provideDeviceDataSource(context: Context): DeviceDataRepository {
+    private fun provideDeviceDataSource(context: Context): DeviceDataRepository {
         val database = TestDatabase.getInstance(context)
         return DeviceDataRepository(database)
     }
 
-    fun provideMainUserDataSource(context: Context): MainUserDataRepository {
+    private fun provideMainUserDataSource(context: Context): MainUserDataRepository {
         val database = TestDatabase.getInstance(context)
         return MainUserDataRepository(database)
     }
 
-    fun provideApiDataSource(context: Context) :ApiDataRepository {
+    private fun provideApiDataSource(context: Context) :ApiDataRepository {
         return ApiDataRepository(ApiHelper(RetrofitBuilder.apiService))
     }
 

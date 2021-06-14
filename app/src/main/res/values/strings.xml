@@ -1,7 +1,46 @@
 <resources>
+    <!-- Main Page -->
     <string name="app_name">ModuloTechTest</string>
     <string name="Light">Light</string>
     <string name="RollerShutter">Roller Shutter</string>
     <string name="Heater">Heater</string>
-    <string name="Ok">Ok</string>
+
+    <!-- Preference Titles -->*
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Parameters -->
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="setting_header">Profile parameters</string>
+    <string name="additional_settings">Additional parameters</string>
+    <string name="nom">Last name</string>
+    <string name="prenom">First name</string>
+
+    <!-- Devices -->
+    <string name="ON">ON</string>
+    <string name="OFF">OFF</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="email">Email</string>
+    <string name="number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="streetAdress">Street number</string>
+    <string name="city">City</string>
+    <string name="postalCode">Postal Code</string>
+    <string name="street">Street</string>
+    <string name="streetCode">StreetCode</string>
+    <string name="country">Country</string>
+    <string name="positionText">Position</string>
+    <string name="intensityText">Intensity</string>
+    <string name="resetData">Reset Data</string>
+
 </resources>

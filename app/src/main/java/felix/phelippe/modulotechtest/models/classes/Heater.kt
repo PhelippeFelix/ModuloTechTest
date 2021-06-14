@@ -6,8 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 class Heater (
-    @PrimaryKey
-    val id: Int,
+    @PrimaryKey val id: Int,
     val temperature: Int,
     val mode: Boolean,
     val deviceName: String,

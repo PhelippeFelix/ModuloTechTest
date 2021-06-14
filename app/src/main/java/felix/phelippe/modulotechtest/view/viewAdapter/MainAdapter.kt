@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import felix.phelippe.modulotechtest.R
 import felix.phelippe.modulotechtest.models.classes.Device
 import felix.phelippe.modulotechtest.view.viewHolder.MainViewHolder
+import felix.phelippe.modulotechtest.viewModel.MainViewModel
 import java.util.Collections.addAll
 
 class MainAdapter (private val devices:MutableList<Device>) : RecyclerView.Adapter<MainViewHolder>() {
@@ -20,7 +21,7 @@ class MainAdapter (private val devices:MutableList<Device>) : RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(p0: MainViewHolder, p1: Int) {
-        p0.updateWithData(this.devices[p1], p0.adapterPosition)
+        p0.updateWithData(this.devices[p1])
     }
 
     fun addDevices(devices: List<Device>) {

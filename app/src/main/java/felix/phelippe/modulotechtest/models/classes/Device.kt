@@ -1,6 +1,8 @@
 package felix.phelippe.modulotechtest.models.classes
 
-data class Device(
+import java.io.Serializable
+
+data class Device (
     val deviceName: String,
     val id: Int,
     val intensity: Int,

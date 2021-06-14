@@ -11,5 +11,5 @@ class RollerShutter(
     val position: Int,
     val deviceName: String,
     val productType: String){
-    fun toDevice()=Device(deviceName,id,0,"null",0,productType,0)
+    fun toDevice()=Device(deviceName,id,0,"null",position,productType,0)
 }

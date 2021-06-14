@@ -21,6 +21,9 @@ interface DeviceDao {
     @Query ("SELECT * FROM Light")
     suspend fun getLights() : List<Light>
 
+    @Query("SELECT * FROM Light WHERE Light.id = :index")
+    suspend fun getLightById(index:Int) : Light
+
     @Insert
     suspend fun insertHeater(heater: Heater): Long
 
@@ -33,6 +36,9 @@ interface DeviceDao {
     @Query ("SELECT * FROM Heater")
     suspend fun getHeaters() : List<Heater>
 
+    @Query("SELECT * FROM Heater WHERE Heater.id = :index")
+    suspend fun getHeaterById(index:Int) : Heater
+
     @Insert
     suspend  fun insertRollerShutter(rollerShutter: RollerShutter): Long
 
@@ -44,4 +50,7 @@ interface DeviceDao {
 
     @Query ("SELECT * FROM RollerShutter")
     suspend fun getRollerShutters() : List<RollerShutter>
+
+    @Query("SELECT * FROM RollerShutter WHERE RollerShutter.id = :index")
+    suspend fun getRollerShutterById(index:Int) : RollerShutter
 }

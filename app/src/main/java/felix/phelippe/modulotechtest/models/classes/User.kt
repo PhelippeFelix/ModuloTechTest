@@ -5,4 +5,17 @@ data class User(
     val birthDate: Long,
     val firstName: String,
     val lastName: String
-)
+){
+    fun toMainUser():MainUser{
+        return MainUser(1,
+            address.city,
+            address.country,
+            address.postalCode,
+            address.street,
+            address.streetCode,
+            birthDate,
+            firstName,
+            lastName,
+            null,)
+    }
+}

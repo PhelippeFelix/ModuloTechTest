@@ -51,6 +51,20 @@ class MainViewModel (
         return deviceDataRepository.getRollerShutters()
     }
 
+    // --- GET BY ID ---
+
+    suspend  fun getLightById(index:Int) : Light {
+        return deviceDataRepository.getLightById(index)
+    }
+
+    suspend fun getHeaterById(index:Int) : Heater {
+        return deviceDataRepository.getHeaterById(index)
+    }
+
+    suspend  fun getRollerShutterById(index:Int) : RollerShutter {
+        return deviceDataRepository.getRollerShutterById(index)
+    }
+
     // --- CREATE ---
 
     suspend fun insertLight(light: Light): Long {
@@ -78,6 +92,18 @@ class MainViewModel (
         return deviceDataRepository.updateRollerShutter(rollerShutter)
     }
 
+    // --- DELETE ---
+    suspend fun deleteLight(light: Light) {
+        return deviceDataRepository.deleteLight(light)
+    }
+
+    suspend fun deleteHeater(heater: Heater) {
+        return deviceDataRepository.deleteHeater(heater)
+    }
+
+    suspend fun deleteRollerShutter(rollerShutter: RollerShutter) {
+        return deviceDataRepository.deleteRollerShutter(rollerShutter)
+    }
 
     // --------------------
     // MAIN USER

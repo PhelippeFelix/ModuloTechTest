@@ -1,5 +1,6 @@
 package felix.phelippe.modulotechtest.view.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import felix.phelippe.modulotechtest.R
 import felix.phelippe.modulotechtest.models.Di.Injection
 import felix.phelippe.modulotechtest.models.classes.*
+import felix.phelippe.modulotechtest.models.utils.DeviceConverter
 import felix.phelippe.modulotechtest.models.utils.Status
 import felix.phelippe.modulotechtest.models.utils.Status.SUCCESS
 import felix.phelippe.modulotechtest.view.viewAdapter.MainAdapter
@@ -28,20 +30,50 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
 
     lateinit var adapter: MainAdapter
     lateinit var mainViewModel: MainViewModel
+    lateinit var converter: DeviceConverter
     lateinit var mainUser: MainUser
-    var listOfDevice: MutableList<Device> = mutableListOf()
     var filters = mutableListOf<String>()
+    private var rollerShutters: List<RollerShutter> = mutableListOf()
+    private var lights: List<Light> = mutableListOf()
+    private var heater: List<Heater> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        converter = DeviceConverter()
+    }
 
-
+    override fun onStart() {
         setViewModel()
         setupOnClickButtons()
-        setupUi()
-        setupObservers()
+        setupData()
+        super.onStart()
     }
+
+    private fun setupData() {
+        launch {
+            if (mainViewModel.getMainUser()==null)
+                dataFromApi()
+            else {
+                dataFromDatabase()
+            }
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+    }
+
+    private fun dataFromDatabase() {
+        launch {
+            rollerShutters = mainViewModel.getRollerShutters()
+            lights = mainViewModel.getLights()
+            heater = mainViewModel.getHeaters()
+            mainUser = mainViewModel.getMainUser()
+            filter()
+        }
+    }
+
 
     private fun setViewModel() {
         mainViewModel = ViewModelProvider(
@@ -50,21 +82,10 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
         ).get(MainViewModel::class.java)
     }
 
-    private suspend fun loadData() {
-        if (mainViewModel.getMainUser() == null) {
-            listOfDevice
-        } else {
-            print("aaaaaaaaa")
-            println(mainViewModel.getMainUser())
-        }
-    }
-
     private fun setupOnClickButtons() {
-        OkFilter.setOnClickListener {
-            launch {
-                loadData()
-            }
-            lottie.visibility = View.VISIBLE
+        settingsButton.setOnClickListener {
+            val intent = Intent(this, SettingsActivity::class.java)
+            startActivity(intent)
         }
         LightFilter.setOnClickListener {
             if (filters.contains("light")) {
@@ -72,19 +93,19 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
                 LightFilter.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.design_default_color_primary
+                        R.color.grey_500
                     )
                 )
-                println(filters)
             } else {
                 filters.add("light")
                 LightFilter.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.design_default_color_primary_dark
+                        R.color.grey_700
                     )
                 )
             }
+            filter()
         }
         RollerShutterFilter.setOnClickListener {
             if (filters.contains("rollerShutter")) {
@@ -92,7 +113,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
                 RollerShutterFilter.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.design_default_color_primary
+                        R.color.grey_500
                     )
                 )
             } else {
@@ -100,39 +121,56 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
                 RollerShutterFilter.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.design_default_color_primary_dark
+                        R.color.grey_700
                     )
                 )
             }
+            filter()
         }
         HeaterFilter.setOnClickListener {
-            if (filters.contains("Heater")) {
-                filters.remove("Heater")
+            if (filters.contains("heater")) {
+                filters.remove("heater")
                 HeaterFilter.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.design_default_color_primary
+                        R.color.grey_500
                     )
                 )
             } else {
-                filters.add("Heater")
+                filters.add("heater")
                 HeaterFilter.setBackgroundColor(
                     ContextCompat.getColor(
                         this,
-                        R.color.design_default_color_primary_dark
+                        R.color.grey_700
                     )
                 )
             }
+            filter()
         }
     }
 
-    private fun setupObservers() {
+    private fun filter(){
+        var listOfDevice: MutableList<Device> = mutableListOf()
+        if (filters.contains("light"))
+            listOfDevice.addAll(converter.lightToListDevice(lights))
+        if (filters.contains("rollerShutter"))
+            listOfDevice.addAll(converter.rollerShutterToListDevice(rollerShutters))
+        if (filters.contains("heater"))
+            listOfDevice.addAll(converter.heaterToListDevice(heater))
+        if (filters.isEmpty())
+            listOfDevice.addAll(converter.convertAllToDevice(rollerShutters,lights,heater))
+        retrieveList(listOfDevice)
+    }
+
+    private fun dataFromApi() {
         mainViewModel.getData().observe(this, Observer {
             it?.let { resource ->
                 when (resource.status) {
                     SUCCESS -> {
                         lottie.visibility = View.GONE
-                        resource.data?.let { data -> retrieveList(data) }
+                        resource.data?.let { data ->
+                            mainUser = data.user.toMainUser()
+                            dataFromApiToDatabase(data) }
                     }
                     Status.ERROR -> {
                         lottie.visibility = View.GONE
@@ -146,9 +184,22 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
         })
     }
 
-        private fun setupUi() {
+    private fun dataFromApiToDatabase(data: Data) {
+        launch {
+            for (i in converter.selectHeater(data.devices))
+                mainViewModel.insertHeater(i)
+            for (i in converter.selectLights(data.devices))
+                mainViewModel.insertLight(i)
+            for (i in converter.selectRollerShutter(data.devices))
+                mainViewModel.insertRollerShutter(i)
+            mainViewModel.insertMainUser(data.user.toMainUser())
+            dataFromDatabase()
+        }
+    }
+
+    private fun setupUi(devices : List<Device>) {
             MainRecyclerView.layoutManager = LinearLayoutManager(this)
-            this.adapter = MainAdapter(listOfDevice)
+            this.adapter = MainAdapter(devices.toMutableList())
             MainRecyclerView.addItemDecoration(
                 DividerItemDecoration(
                     MainRecyclerView.context,
@@ -158,12 +209,10 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
             MainRecyclerView.adapter = adapter
         }
 
-    private fun retrieveList(data: Data) {
-
+    private fun retrieveList(devices : List<Device>) {
+        setupUi(devices)
         adapter.apply {
-            listOfDevice = data.devices as MutableList<Device>
-            mainUser = MainUser(1,data.user.address.toString(),data.user.birthDate,data.user.firstName,data.user.lastName)
-            addDevices(listOfDevice)
+            addDevices(devices)
             notifyDataSetChanged()
         }
     }

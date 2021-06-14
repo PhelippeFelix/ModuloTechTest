@@ -7,8 +7,12 @@ import androidx.room.PrimaryKey
 @Entity
 data class MainUser(
     @PrimaryKey(autoGenerate = true) var id: Long=1,
-    val address: String,
+    val addressCity: String,
+    val addressCountry: String,
+    val addressPostalCode: Int,
+    val addressStreet: String,
+    val addressStreetCode: String,
     val birthDate: Long,
     val firstName: String,
-    val lastName: String
-)
+    val lastName: String,
+    val email: String?)
