@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import felix.phelippe.modulotechtest.R
-import felix.phelippe.modulotechtest.models.Di.Injection
+import felix.phelippe.modulotechtest.models.di.Injection
 import felix.phelippe.modulotechtest.models.classes.*
 import felix.phelippe.modulotechtest.models.utils.DeviceConverter
 import felix.phelippe.modulotechtest.models.utils.Status
@@ -150,7 +150,7 @@ class MainActivity() : AppCompatActivity(), CoroutineScope {
     }
 
     private fun filter(){
-        var listOfDevice: MutableList<Device> = mutableListOf()
+        val listOfDevice: MutableList<Device> = mutableListOf()
         if (filters.contains("light"))
             listOfDevice.addAll(converter.lightToListDevice(lights))
         if (filters.contains("rollerShutter"))

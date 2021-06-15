@@ -1,0 +1,26 @@
+<resources>
+    <!-- Main Page -->
+    <string name="app_name">ModuloTechTest</string>
+    <string name="Light">Lumières</string>
+    <string name="RollerShutter">Volets roulants</string>
+    <string name="Heater">Radiateur</string>
+
+    <!-- Parameters -->
+    <string name="additional_settings">Paramètres</string>
+    <string name="nom">Nom</string>
+    <string name="prenom">Prénom</string>
+    <string name="email">Email</string>
+    <string name="address">Adresse</string>
+    <string name="city">Ville</string>
+    <string name="postalCode">Code postal</string>
+    <string name="street">Rue</string>
+    <string name="streetCode">Numéro</string>
+    <string name="country">Pays</string>
+    <string name="positionText">Position</string>
+    <string name="intensityText">Intensité</string>
+
+    <!-- Devices -->
+    <string name="ON">Allumé</string>
+    <string name="OFF">Eteint</string>
+    <string name="errorMesssage">Veuillez entrer un e-mail valide ou laisser la case vide.</string>
+</resources>

@@ -1,16 +1,14 @@
 package felix.phelippe.modulotechtest.view.activities
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import felix.phelippe.modulotechtest.R
-import felix.phelippe.modulotechtest.models.Di.Injection
+import felix.phelippe.modulotechtest.models.di.Injection
 import felix.phelippe.modulotechtest.models.classes.Heater
 import felix.phelippe.modulotechtest.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.activity_heater.*
-import kotlinx.android.synthetic.main.activity_light.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch

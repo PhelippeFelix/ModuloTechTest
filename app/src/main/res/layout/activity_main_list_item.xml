@@ -16,9 +16,9 @@
         android:layout_margin="20dp"/>
 
     <ImageButton
-        android:id="@+id/showButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:id="@+id/arrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_arrow_forward_ios_24"
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/white"
@@ -35,7 +35,7 @@
         android:textSize="25sp"
         app:layout_constraintStart_toEndOf="@id/list_image"
         android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toStartOf="@id/showButton"
+        app:layout_constraintEnd_toStartOf="@id/arrow"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
@@ -48,7 +48,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/list_image"
         app:layout_constraintTop_toBottomOf="@id/productType"
-        app:layout_constraintEnd_toStartOf="@id/showButton"/>
+        app:layout_constraintEnd_toStartOf="@id/arrow"/>
 
 
 

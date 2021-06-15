@@ -1,13 +1,11 @@
 package felix.phelippe.modulotechtest.view.activities
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import felix.phelippe.modulotechtest.R
-import felix.phelippe.modulotechtest.models.Di.Injection
-import felix.phelippe.modulotechtest.models.classes.Address
+import felix.phelippe.modulotechtest.models.di.Injection
 import felix.phelippe.modulotechtest.models.classes.MainUser
 import felix.phelippe.modulotechtest.viewModel.MainViewModel
 import kotlinx.android.synthetic.main.activity_settings.*
@@ -53,7 +51,7 @@ class SettingsActivity() : AppCompatActivity(), CoroutineScope {
                         finish()
                     }
             } else {
-                Toast.makeText(this, "Veuillez mettre des informations valide", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, getString(R.string.errorMesssage), Toast.LENGTH_LONG).show()
             }
         }
     }

@@ -1,8 +1,6 @@
 package felix.phelippe.modulotechtest.models.database.dao
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
-import felix.phelippe.modulotechtest.models.classes.Light
 import felix.phelippe.modulotechtest.models.classes.MainUser
 
 @Dao

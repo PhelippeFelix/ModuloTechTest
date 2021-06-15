@@ -5,11 +5,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import felix.phelippe.modulotechtest.R
-import felix.phelippe.modulotechtest.models.Di.Injection
-import felix.phelippe.modulotechtest.models.classes.Heater
+import felix.phelippe.modulotechtest.models.di.Injection
 import felix.phelippe.modulotechtest.models.classes.Light
 import felix.phelippe.modulotechtest.viewModel.MainViewModel
-import kotlinx.android.synthetic.main.activity_heater.*
 import kotlinx.android.synthetic.main.activity_light.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -21,9 +19,9 @@ class LightActivity : AppCompatActivity() , CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main
 
-    lateinit var mainViewModel: MainViewModel
+    private lateinit var mainViewModel: MainViewModel
     lateinit var light: Light
-    var mode:Boolean=false
+    private var mode:Boolean=false
 
 
     override fun onCreate(savedInstanceSttate: Bundle?) {

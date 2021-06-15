@@ -1,4 +1,4 @@
-package felix.phelippe.modulotechtest.models.Di
+package felix.phelippe.modulotechtest.models.di
 
 import android.content.Context
 import felix.phelippe.modulotechtest.models.api.ApiHelper
