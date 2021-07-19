@@ -24,3 +24,6 @@ Room
 Coroutines  
 Retrofit  
 Lottie  
+
+[![1.png](https://i.postimg.cc/vZycmNdf/1.png)](https://postimg.cc/KR9ZqQj8)
+[![2.png](https://i.postimg.cc/W3x4c9nD/2.png)](https://postimg.cc/S274WfHq)
